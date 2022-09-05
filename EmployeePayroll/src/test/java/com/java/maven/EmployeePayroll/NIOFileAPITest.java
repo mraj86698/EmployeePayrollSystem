@@ -10,37 +10,31 @@ import java.util.stream.IntStream;
 
 import org.junit.Test;
 
+/**
+ * Unit test
+ */
 public class NIOFileAPITest {
-
 	private static String HOME = "C:\\Users\\mraj\\mohan\\java\\day27.1\\EmployeePayrollSystem\\EmployeePayroll\\src\\main\\java\\com\\java\\maven\\EmployeePayroll";
 	private static String PLAY_WITH_NIO = "TempPlayGround";
 
 	@Test
 	public void givenPathWhenCheckedThenConfirm() throws IOException {
-		/**
-		 * Check File exists
-		 */
+		// Check File exists
 		Path homePath = Paths.get(HOME);
 		assertTrue(Files.exists(homePath));
 		System.out.println(homePath);
 
-		/**
-		 * Delete file and check file does not exist
-		 */
+		// Delete file and check file does not exist
 		Path playPath = Paths.get(HOME + "/" + PLAY_WITH_NIO);
 		if (Files.exists(playPath))
 			FileUtils.deleteFiles(playPath.toFile());
 		assertTrue(Files.notExists(playPath));
 
-		/**
-		 * Create a directory
-		 */
+		// Create a directory
 		Files.createDirectory(playPath);
 		assertTrue(Files.exists(playPath));
 
-		/**
-		 * Create File
-		 */
+		// Create File
 		IntStream.range(1, 10).forEach(cntr -> {
 			Path tempFile = Paths.get(playPath + "/temp" + cntr);
 			assertTrue(Files.notExists(tempFile));
@@ -51,9 +45,7 @@ public class NIOFileAPITest {
 			assertTrue(Files.exists(tempFile));
 		});
 
-		/**
-		 * List files, directories as well as files with extensions
-		 */
+		// List files, directories as well as files with extensions
 		System.out.println("Files.list");
 		Files.list(playPath).filter(Files::isRegularFile).forEach(System.out::println);
 		System.out.println("Files.newDirectory");
@@ -63,4 +55,9 @@ public class NIOFileAPITest {
 				.forEach(System.out::println);
 	}
 
+	public void givenADirectoryWhenWatchedListsAllTheActivities() throws IOException {
+		Path dir = Paths.get(HOME+"/"+PLAY_WITH_NIO);
+		Files.list(dir).filter(Files::isRegularFile).forEach(System.out::println);
+		new Java8WatchService(dir).processEvents();
+	}
 }
