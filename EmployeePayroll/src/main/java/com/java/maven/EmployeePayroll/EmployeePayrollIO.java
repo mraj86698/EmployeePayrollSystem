@@ -9,7 +9,10 @@ import java.util.List;
 public class EmployeePayrollIO {
 
 	public static String PAYROLL_FNAME = "payroll.txt";
-
+	/**
+	 * Method to write list containing Emp Data to file
+	 * @param List containing Emp Data
+	 */
 	public void writeData(List<EmployeePayrollData> list) {
 
 		StringBuffer empBuffer = new StringBuffer();
@@ -24,6 +27,10 @@ public class EmployeePayrollIO {
 			exception.printStackTrace();
 		}
 	}
+	/**
+	 * Method for counting entries in File
+	 * @return NoOfEntries
+	 */
 
 	public int countEntries() {
 
@@ -35,5 +42,15 @@ public class EmployeePayrollIO {
 			exception.printStackTrace();
 		}
 		return entries;
+	}
+	/**Method to write data from file to console
+	 *
+	 */
+	public void printData() {
+		try {
+			Files.lines(new File(PAYROLL_FNAME).toPath()).forEach(System.out::println);
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
 	}
 }
