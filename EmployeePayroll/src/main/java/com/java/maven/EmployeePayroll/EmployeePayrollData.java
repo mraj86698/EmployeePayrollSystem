@@ -15,6 +15,7 @@ public class EmployeePayrollData {
 		this.name = name;
 		this.salary = salary;
 	}
+
 	/**
 	 * To Display the Employee Details
 	 */
@@ -25,6 +26,9 @@ public class EmployeePayrollData {
 		System.out.println("Employee Salary: "+salary);
 		System.out.println("------------------------------------------------------");
 		System.out.println();
+	}
+	public String pushData() {
+		return "id : " + id + ", Name : " + name + ", salary : " + salary;
 	}
 	/**
 	 * It Returns the value into String Format
