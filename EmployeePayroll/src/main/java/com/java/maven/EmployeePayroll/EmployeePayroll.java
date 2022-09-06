@@ -9,9 +9,14 @@ public class EmployeePayroll {
 	public enum IOCommand{
 		CONSOLE_IO,FILE_IO,DB_IO,REST_IO
 	}
-
+	/**
+	 * Declaring global var list of employee data
+	 */
 	private List<EmployeePayrollData> list;
-
+	/**
+	 * Setter for list containing Emp Data
+	 * @param List containing Emp Data
+	 */
 	public void setList(List<EmployeePayrollData> list) {
 		this.list = list;
 	}
@@ -61,6 +66,17 @@ public class EmployeePayroll {
 		}
 	}
 
+	/**
+	 * Method to print data to console
+	 */
+	public void printData() {
+		new EmployeePayrollIO().printData();
+	}
+	/**
+	 * Method to count entries in file
+	 * @param ioType
+	 * @return NoOfEntries
+	 */
 	public int countEntries(IOCommand ioType) {
 		if(ioType.equals(IOCommand.FILE_IO))
 			return new EmployeePayrollIO().countEntries();
@@ -73,6 +89,8 @@ public class EmployeePayroll {
 		emp.readEmployeeData();
 		emp.writeEmployeeData(IOCommand.CONSOLE_IO);
 		emp.writeEmployeeData(IOCommand.FILE_IO);
+		emp.printData();
+
 	}
 
 }
